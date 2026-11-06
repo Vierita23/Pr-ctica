@@ -1,0 +1,4 @@
+com/empresa/dao/UsuarioDAO.class
+com/empresa/ejb/UsuarioServiceEJB.class
+com/empresa/controller/MainController.class
+com/empresa/dto/UsuarioDTO.class

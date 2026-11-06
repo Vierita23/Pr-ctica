@@ -1,0 +1,40 @@
+.form-container {
+  background: white;
+  max-width: 520px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.campo,
+.campo-checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.campo-checkbox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.btn-guardar {
+  background: #0284c7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+}

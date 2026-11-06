@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/templates/plantilla.xhtml">
+
+    <ui:define name="titulo">Gestión de Empleados - JSF Facelets</ui:define>
+
+    <ui:define name="contenido">
+        <h2>Listado de Empleados (Componentes JSF + Facelets)</h2>
+
+        <!-- Tabla de componentes JSF con Data Binding -->
+        <h:dataTable value="#{empleadoBean.lista}" var="emp"
+                     styleClass="tabla"
+                     style="width:100%; border-collapse:collapse; margin-bottom:20px;">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{emp.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nombre</f:facet>
+                #{emp.nombre}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Cargo</f:facet>
+                #{emp.cargo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Salario</f:facet>
+                $#{emp.salario}
+            </h:column>
+        </h:dataTable>
+
+        <h3>Agregar Empleado (Formulario JSF)</h3>
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputLabel value="Nombre:" />
+                <h:inputText value="#{empleadoBean.nuevoEmpleado.nombre}" required="true" />
+
+                <h:outputLabel value="Cargo:" />
+                <h:inputText value="#{empleadoBean.nuevoEmpleado.cargo}" required="true" />
+
+                <h:outputLabel value="Salario:" />
+                <h:inputText value="#{empleadoBean.nuevoEmpleado.salario}" required="true" />
+
+                <h:commandButton value="Guardar en JSF" action="#{empleadoBean.agregar}"
+                                 style="background:#0284c7; color:white; padding:8px 15px; border:none; border-radius:5px;" />
+            </h:panelGrid>
+        </h:form>
+
+        <p><h:outputLink value="#{request.contextPath}/empleados">Ver la misma lista con JSP + JSTL</h:outputLink></p>
+    </ui:define>
+
+</ui:composition>
+</html>

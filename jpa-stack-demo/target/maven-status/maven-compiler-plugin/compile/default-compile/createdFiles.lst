@@ -1,0 +1,9 @@
+com/empresa/controller/CategoriaController.class
+com/empresa/service/ProductoService.class
+com/empresa/repository/CategoriaRepository.class
+com/empresa/entity/Producto.class
+com/empresa/JpaStackDemoApplication.class
+com/empresa/service/CategoriaService.class
+com/empresa/repository/ProductoRepository.class
+com/empresa/entity/Categoria.class
+com/empresa/controller/ProductoController.class

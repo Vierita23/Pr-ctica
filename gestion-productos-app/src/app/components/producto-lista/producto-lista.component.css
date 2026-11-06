@@ -1,0 +1,57 @@
+.container {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.alerta {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.tabla-productos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-productos th,
+.tabla-productos td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla-productos th {
+  background: #0284c7;
+  color: white;
+}
+
+.disponible {
+  color: #166534;
+  background: #dcfce7;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.agotado {
+  color: #991b1b;
+  background: #fee2e2;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+.btn-eliminar {
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}

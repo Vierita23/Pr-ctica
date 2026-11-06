@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>{{ titulo }}</h2>
+
+  <div *ngIf="productos.length === 0" class="alerta">
+    No hay productos disponibles en este momento.
+  </div>
+
+  <table *ngIf="productos.length > 0" class="tabla-productos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Categoría</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of productos">
+        <td>{{ prod.id }}</td>
+        <td>{{ prod.nombre }}</td>
+        <td>${{ prod.precio }}</td>
+        <td>{{ prod.categoria }}</td>
+        <td>
+          <span [class.disponible]="prod.disponible" [class.agotado]="!prod.disponible">
+            {{ prod.disponible ? 'Disponible' : 'Agotado' }}
+          </span>
+        </td>
+        <td>
+          <button (click)="borrar(prod.id)" class="btn-eliminar">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
