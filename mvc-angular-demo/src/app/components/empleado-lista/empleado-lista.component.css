@@ -1,0 +1,55 @@
+.card-container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  overflow-x: auto;
+}
+
+h2 {
+  margin: 0 0 20px;
+}
+
+.tabla-mvc {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-mvc th,
+.tabla-mvc td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla-mvc th {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.tabla-mvc th:last-child,
+.tabla-mvc td:last-child,
+.tabla-mvc td:nth-child(5) {
+  white-space: nowrap;
+}
+
+.tabla-mvc tr:last-child td {
+  border-bottom: 0;
+}
+
+.btn-eliminar {
+  border: 0;
+  border-radius: 8px;
+  background: #dc2626;
+  color: #ffffff;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.alerta {
+  margin: 0;
+  padding: 16px;
+  border-radius: 10px;
+  background: #fef3c7;
+  color: #92400e;
+}

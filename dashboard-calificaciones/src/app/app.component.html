@@ -1,0 +1,150 @@
+<header class="barra">
+  <div>
+    <p class="marca">Lenguaje 3</p>
+    <h1>Dashboard de calificaciones</h1>
+  </div>
+  <p class="ayuda">Sube un PDF y la aplicación lee las notas, las ordena y calcula el promedio.</p>
+</header>
+
+<main class="pagina">
+  <section
+    class="subida"
+    (dragover)="$event.preventDefault()"
+    (drop)="soltar($event)">
+    <h2>Subir PDF</h2>
+    <p>Arrastra el archivo aquí o elige uno desde tu Mac.</p>
+    <label class="boton">
+      Elegir PDF
+      <input type="file" accept="application/pdf,.pdf" multiple (change)="alElegir($event)">
+    </label>
+    <div class="ejemplos">
+      <button type="button" (click)="cargarEjemplo('ejemplos/calificaciones-tablero.pdf', 'calificaciones-tablero.pdf')">
+        Ejemplo del tablero
+      </button>
+      <button type="button" (click)="cargarEjemplo('ejemplos/calificaciones-nombres.pdf', 'calificaciones-nombres.pdf')">
+        Ejemplo con nombres
+      </button>
+    </div>
+    @if (leyendo()) {
+      <p class="estado">Leyendo el PDF...</p>
+    }
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+  </section>
+
+  @if (documentos().length === 0) {
+    <section class="vacio">
+      <h2>Todavía no hay documentos</h2>
+      <p>Cuando subas un PDF de calificaciones, aquí verás la tabla, el cálculo y la gráfica.</p>
+    </section>
+  } @else {
+    <section class="tarjetas">
+      @for (documento of documentos(); track documento.id) {
+        <button
+          type="button"
+          class="tarjeta"
+          [class.activa]="seleccionado()?.id === documento.id"
+          (click)="elegir(documento)">
+          <strong>{{ documento.nombre }}</strong>
+          <span>{{ documento.paginas }} pág. · {{ documento.filas.length }} filas</span>
+        </button>
+      }
+    </section>
+
+    @if (seleccionado(); as seleccionado) {
+      <section class="resumen">
+        <article>
+          <span>Promedio general</span>
+          <strong>{{ seleccionado.promedioGeneral === null ? '—' : (seleccionado.promedioGeneral | number:'1.1-2') }}</strong>
+        </article>
+        <article>
+          <span>Nota más alta</span>
+          <strong>{{ seleccionado.notaMax === null ? '—' : (seleccionado.notaMax | number:'1.0-2') }}</strong>
+        </article>
+        <article>
+          <span>Nota más baja</span>
+          <strong>{{ seleccionado.notaMin === null ? '—' : (seleccionado.notaMin | number:'1.0-2') }}</strong>
+        </article>
+        <article>
+          <span>Filas leídas</span>
+          <strong>{{ seleccionado.filas.length }}</strong>
+        </article>
+      </section>
+
+      @if (seleccionado.filas.length === 0) {
+        <section class="panel">
+          <h2>No encontré una tabla de notas</h2>
+          <p>El PDF sí se leyó. Revisa el texto de abajo: hace falta que las notas estén escritas, no en una foto escaneada.</p>
+        </section>
+      } @else {
+        <section class="panel">
+          <h2>Tabla</h2>
+          <div class="tabla-contenedor">
+            <table>
+              <thead>
+                <tr>
+                  <th>Estudiante</th>
+                  @for (columna of columnas(seleccionado); track columna) {
+                    <th>Nota {{ columna + 1 }}</th>
+                  }
+                  <th>Promedio</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (fila of seleccionado.filas; track $index) {
+                  <tr>
+                    <td>{{ fila.etiqueta }}</td>
+                    @for (columna of columnas(seleccionado); track columna) {
+                      <td>{{ fila.notas[columna] === undefined ? '—' : (fila.notas[columna] | number:'1.0-2') }}</td>
+                    }
+                    <td [class.baja]="fila.promedio < 5">{{ fila.promedio | number:'1.1-2' }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="dos-columnas">
+          <article class="panel">
+            <h2>Cálculo</h2>
+            <ul>
+              @for (fila of seleccionado.filas; track $index) {
+                <li><strong>{{ fila.etiqueta }}:</strong> {{ fila.formula }}</li>
+              }
+            </ul>
+            <p class="total">
+              Promedio de todas las notas:
+              <strong>{{ seleccionado.promedioGeneral | number:'1.2-2' }}</strong>
+            </p>
+          </article>
+
+          <article class="panel">
+            <h2>Gráfica</h2>
+            <svg viewBox="0 0 640 250" class="grafica" role="img" aria-label="Promedio de cada fila">
+              <line x1="48" y1="20" x2="48" y2="190" />
+              <line x1="48" y1="190" x2="600" y2="190" />
+              <polyline [attr.points]="linea(seleccionado)" />
+              @for (fila of seleccionado.filas; track $index) {
+                <circle
+                  [attr.cx]="cx($index, seleccionado.filas.length)"
+                  [attr.cy]="cy(fila.promedio, escala(seleccionado))"
+                  r="5" />
+                <text
+                  [attr.x]="cx($index, seleccionado.filas.length)"
+                  y="214">{{ fila.etiqueta }}</text>
+              }
+            </svg>
+            <p class="nota-grafica">Cada punto es el promedio de esa fila.</p>
+          </article>
+        </section>
+      }
+
+      <section class="panel">
+        <h2>Texto leído del PDF</h2>
+        <pre>{{ seleccionado.texto }}</pre>
+      </section>
+    }
+  }
+</main>

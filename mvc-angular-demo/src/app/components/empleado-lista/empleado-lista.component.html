@@ -1,0 +1,30 @@
+<div class="card-container">
+  <h2>{{ titulo }}</h2>
+  <table *ngIf="listaEmpleados.length > 0" class="tabla-mvc">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Cargo</th>
+        <th>Departamento</th>
+        <th>Salario ($)</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of listaEmpleados">
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.nombre }}</td>
+        <td>{{ emp.cargo }}</td>
+        <td>{{ emp.departamento }}</td>
+        <td>${{ emp.salario }}</td>
+        <td>
+          <button (click)="borrarEmpleado(emp.id)" class="btn-eliminar">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="listaEmpleados.length === 0" class="alerta">
+    No hay registros de empleados en el Modelo.
+  </p>
+</div>

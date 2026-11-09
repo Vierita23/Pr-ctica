@@ -1,0 +1,27 @@
+<div class="form-container">
+  <h2>Registrar Nuevo Empleado</h2>
+  <form (ngSubmit)="guardar()">
+    <div class="grupo-campo">
+      <label>Nombre Completo:</label>
+      <input type="text" [(ngModel)]="nuevoEmpleado.nombre" name="nombre" required>
+    </div>
+    <div class="grupo-campo">
+      <label>Cargo:</label>
+      <input type="text" [(ngModel)]="nuevoEmpleado.cargo" name="cargo" required>
+    </div>
+    <div class="grupo-campo">
+      <label>Departamento:</label>
+      <select [(ngModel)]="nuevoEmpleado.departamento" name="departamento">
+        <option value="Tecnología">Tecnología</option>
+        <option value="Sistemas">Sistemas</option>
+        <option value="Diseño">Diseño</option>
+        <option value="Ventas">Ventas</option>
+      </select>
+    </div>
+    <div class="grupo-campo">
+      <label>Salario Mensual ($):</label>
+      <input type="number" [(ngModel)]="nuevoEmpleado.salario" name="salario" required>
+    </div>
+    <button type="submit" class="btn-guardar">Registrar en el Modelo</button>
+  </form>
+</div>

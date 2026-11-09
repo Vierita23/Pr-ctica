@@ -1,0 +1,35 @@
+.header-app {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 28px 32px 20px;
+}
+
+h1 {
+  margin: 0 0 18px;
+  font-size: 1.8rem;
+}
+
+.menu-navegacion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.menu-navegacion a {
+  color: #dbeafe;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.menu-navegacion a.activo {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+.contenedor-principal {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 48px;
+}
