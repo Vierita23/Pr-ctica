@@ -1,0 +1,10 @@
+<main class="panel">
+  <p class="entorno">{{ entorno }}</p>
+  <h1>{{ titulo }}</h1>
+  <p class="api">API: {{ apiUrl }}</p>
+  <ul>
+    @for (modulo of modulos; track modulo) {
+      <li>{{ modulo }}</li>
+    }
+  </ul>
+</main>

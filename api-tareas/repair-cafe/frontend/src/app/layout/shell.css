@@ -1,0 +1,23 @@
+:host { display: flex; min-height: 100vh; }
+.barra {
+  width: 250px;
+  background: #1f2933;
+  color: #fff;
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.marca { font-size: 1.4rem; font-weight: 800; color: #8fd9b0; }
+.quien { margin: 12px 0 0; }
+.rol { margin: 0 0 16px; color: #9aa5b1; text-transform: capitalize; }
+nav { display: flex; flex-direction: column; gap: 6px; }
+nav a { color: #e4e7eb; text-decoration: none; border-radius: 10px; padding: 10px 12px; }
+nav a.activa, nav a:hover { background: #1f7a4d; color: #fff; }
+.barra button { margin-top: auto; }
+.contenido { flex: 1; padding: 28px; }
+@media (max-width: 800px) {
+  :host { display: block; }
+  .barra { width: 100%; }
+  nav { flex-direction: row; flex-wrap: wrap; }
+}

@@ -1,0 +1,23 @@
+<aside class="barra">
+  <p class="marca">Repair Café</p>
+  <p class="quien">{{ auth.usuario()?.nombre }}</p>
+  <p class="rol">{{ auth.usuario()?.rol }}</p>
+  <nav>
+    <a routerLink="/inicio" routerLinkActive="activa">Inicio</a>
+    <a routerLink="/eventos" routerLinkActive="activa">Eventos</a>
+    <a routerLink="/tickets" routerLinkActive="activa">Tickets</a>
+    @if (auth.usuario()?.rol === 'usuario') {
+      <a routerLink="/tickets/nuevo" routerLinkActive="activa">Nuevo ticket</a>
+    }
+    @if (auth.usuario()?.rol === 'experto') {
+      <a routerLink="/reparaciones" routerLinkActive="activa">Mis reparaciones</a>
+    }
+    @if (auth.usuario()?.rol === 'administrador') {
+      <a routerLink="/personas" routerLinkActive="activa">Personas</a>
+    }
+  </nav>
+  <button type="button" class="boton-secundario" (click)="auth.salir()">Cerrar sesión</button>
+</aside>
+<main class="contenido">
+  <router-outlet></router-outlet>
+</main>

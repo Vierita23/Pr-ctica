@@ -1,0 +1,10 @@
+.acceso {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #1f2933;
+}
+.panel { width: min(420px, 100%); }
+.marca { color: #1f7a4d; font-weight: 800; }
+form { margin-top: 18px; }

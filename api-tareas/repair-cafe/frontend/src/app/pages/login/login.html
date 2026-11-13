@@ -1,0 +1,18 @@
+<section class="acceso">
+  <div class="panel">
+    <p class="marca">Repair Café</p>
+    <h1>Iniciar sesión</h1>
+    <p>Conecta aparatos dañados con expertos voluntarios.</p>
+    <form (ngSubmit)="entrar()">
+      <label class="campo">Correo
+        <input type="email" name="correo" [(ngModel)]="correo" required>
+      </label>
+      <label class="campo">Contraseña
+        <input type="password" name="password" [(ngModel)]="password" required>
+      </label>
+      @if (error) { <p class="error">{{ error }}</p> }
+      <button class="boton" type="submit">Entrar</button>
+    </form>
+    <p>¿No tienes cuenta? <a routerLink="/registro">Regístrate</a></p>
+  </div>
+</section>

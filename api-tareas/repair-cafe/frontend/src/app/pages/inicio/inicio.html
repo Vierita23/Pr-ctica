@@ -1,0 +1,32 @@
+<h1>Esteban Mosquera</h1>
+<p>Organiza reparaciones gratuitas y sigue cada ticket.</p>
+
+@if (resumen) {
+  <section class="metricas">
+    <article class="tarjeta"><span>Usuarios</span><strong>{{ resumen.usuarios }}</strong></article>
+    <article class="tarjeta"><span>Eventos próximos</span><strong>{{ resumen.eventos }}</strong></article>
+    <article class="tarjeta"><span>Tickets pendientes</span><strong>{{ resumen.pendientes }}</strong></article>
+    <article class="tarjeta"><span>Reparadas</span><strong>{{ resumen.reparadas }}</strong></article>
+    <article class="tarjeta"><span>Expertos disponibles</span><strong>{{ resumen.expertos }}</strong></article>
+    <article class="tarjeta"><span>Reparaciones exitosas</span><strong>{{ resumen.porcentajeExito }}%</strong></article>
+  </section>
+  <section class="panel">
+    <h2>Tickets por estado</h2>
+    @for (fila of resumen.porEstado; track fila.estado) {
+      <div class="barra">
+        <span>{{ fila.estado }}</span>
+        <div><i [style.width.%]="fila.total * 20"></i></div>
+        <b>{{ fila.total }}</b>
+      </div>
+    }
+  </section>
+}
+
+<section class="panel">
+  <h2>Próximos eventos</h2>
+  @for (evento of eventos; track evento.nombre) {
+    <p><strong>{{ evento.nombre }}</strong> · {{ evento.fecha | date:'dd/MM/yyyy' }} · {{ hora(evento.hora_inicio) }} · {{ evento.ubicacion }}</p>
+  } @empty {
+    <p>Todavía no hay eventos.</p>
+  }
+</section>

@@ -1,0 +1,34 @@
+<h1>Mis reparaciones</h1>
+@if (error) { <p class="error">{{ error }}</p> }
+@if (mensaje) { <p class="aviso">{{ mensaje }}</p> }
+<form class="panel" (ngSubmit)="guardarCupo()">
+  <h2>Disponibilidad</h2>
+  <label><input type="checkbox" name="disponible" [(ngModel)]="disponible"> Estoy disponible</label>
+  <label class="campo">Cupo máximo<input type="number" name="cupo" [(ngModel)]="cupoMaximo" min="1"></label>
+  <button class="boton" type="submit">Guardar</button>
+</form>
+@for (ticket of tickets; track ticket.id) {
+  <article class="tarjeta">
+    <h2>{{ ticket.codigo }} · {{ ticket.aparato }}</h2>
+    <p>{{ ticket.problema }}</p>
+    <p>Estado del ticket: {{ ticket.estado }} · Asignación: {{ ticket.asignacion_estado }}</p>
+    <label class="campo">Observación<textarea name="obs{{ ticket.id }}" [(ngModel)]="observacion"></textarea></label>
+    @if (ticket.asignacion_estado === 'pendiente') {
+      <button class="boton" type="button" (click)="responder(ticket, 'aceptada')">Aceptar</button>
+      <button class="boton-peligro" type="button" (click)="responder(ticket, 'rechazada')">Rechazar</button>
+    }
+    @if (ticket.asignacion_estado === 'aceptada') {
+      <label class="campo">Nuevo estado
+        <select name="estado{{ ticket.id }}" [(ngModel)]="estado">
+          <option>En reparación</option>
+          <option>Reparado</option>
+          <option>No reparable</option>
+        </select>
+      </label>
+      <label class="campo">Resultado<input name="resultado{{ ticket.id }}" [(ngModel)]="resultado"></label>
+      <button class="boton" type="button" (click)="actualizar(ticket)">Actualizar reparación</button>
+    }
+  </article>
+} @empty {
+  <p>No tienes reparaciones asignadas.</p>
+}

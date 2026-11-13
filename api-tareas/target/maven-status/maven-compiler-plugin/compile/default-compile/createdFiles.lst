@@ -1,0 +1,5 @@
+com/empresa/ApiTareasApplication.class
+com/empresa/repository/TareaRepository.class
+com/empresa/entity/Tarea.class
+com/empresa/controller/TareaController.class
+com/empresa/service/TareaService.class

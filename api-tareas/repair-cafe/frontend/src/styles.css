@@ -1,0 +1,50 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f7f5;
+  color: #1f2933;
+}
+h1, h2, h3 { margin: 0 0 8px; }
+a { color: #1f7a4d; }
+button, input, select, textarea { font: inherit; }
+.tarjeta, .panel {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(31, 41, 51, 0.06);
+}
+.cuadricula { display: grid; gap: 16px; }
+.boton, .boton-secundario, .boton-peligro {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.boton { background: #1f7a4d; color: #fff; }
+.boton-secundario { background: #e8f5ee; color: #1f7a4d; }
+.boton-peligro { background: #b91c1c; color: #fff; }
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.campo input, .campo select, .campo textarea {
+  border: 1px solid #d5ddd8;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.error { color: #b91c1c; }
+.aviso { color: #1f7a4d; }
+.tabla { width: 100%; border-collapse: collapse; }
+.tabla th, .tabla td { text-align: left; padding: 12px; border-bottom: 1px solid #e6eeea; }
+.tabla th { color: #52606d; font-size: 0.85rem; }
+.estado {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #eef2f0;
+  font-weight: 700;
+}
+.estado.Reparado { background: #e5f6ec; color: #146c43; }
+.estado.Pendiente { background: #fff4d6; color: #8a5a00; }
+.estado.Asignado, .estado.pendiente { background: #e7f0ff; color: #1d4ed8; }
+.buscador { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.buscador input, .buscador select { border: 1px solid #d5ddd8; border-radius: 10px; padding: 10px 12px; }

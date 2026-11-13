@@ -1,0 +1,4 @@
+.acceso { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #1f2933; }
+.panel { width: min(520px, 100%); }
+fieldset { border: 1px solid #d5ddd8; border-radius: 10px; margin-bottom: 14px; }
+label { display: block; margin: 6px 0; }

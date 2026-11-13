@@ -1,0 +1,39 @@
+<section class="acceso">
+  <div class="panel">
+    <h1>Crear cuenta</h1>
+    <form (ngSubmit)="crear()">
+      <label class="campo">Nombre
+        <input name="nombre" [(ngModel)]="nombre" required>
+      </label>
+      <label class="campo">Correo
+        <input type="email" name="correo" [(ngModel)]="correo" required>
+      </label>
+      <label class="campo">Contraseña
+        <input type="password" name="password" [(ngModel)]="password" required minlength="6">
+      </label>
+      <label class="campo">Quiero entrar como
+        <select name="rol" [(ngModel)]="rol">
+          <option value="usuario">Usuario</option>
+          <option value="experto">Experto voluntario</option>
+        </select>
+      </label>
+      @if (rol === 'experto') {
+        <fieldset>
+          <legend>Especialidades</legend>
+          @for (item of especialidades; track item.id) {
+            <label>
+              <input type="checkbox" [checked]="elegidas.includes(item.id)" (change)="cambiarEspecialidad(item.id, $any($event.target).checked)">
+              {{ item.nombre }}
+            </label>
+          }
+        </fieldset>
+        <label class="campo">Reparaciones que puedo atender
+          <input type="number" name="cupo" [(ngModel)]="cupoMaximo" min="1">
+        </label>
+      }
+      @if (error) { <p class="error">{{ error }}</p> }
+      <button class="boton" type="submit">Registrarme</button>
+    </form>
+    <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+  </div>
+</section>

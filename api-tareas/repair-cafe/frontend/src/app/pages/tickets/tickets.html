@@ -1,0 +1,61 @@
+<h1>Tickets</h1>
+@if (error) { <p class="error">{{ error }}</p> }
+<div class="buscador">
+  <input placeholder="Buscar por código, aparato o persona" [(ngModel)]="busqueda">
+  <select [(ngModel)]="estado">
+    <option value="">Todos los estados</option>
+    <option>Pendiente</option>
+    <option>Asignado</option>
+    <option>En reparación</option>
+    <option>Reparado</option>
+    <option>No reparable</option>
+  </select>
+</div>
+<div class="panel" style="overflow-x: auto;">
+  <table class="tabla">
+    <thead>
+      <tr><th>Código</th><th>Aparato</th><th>Categoría</th><th>Persona</th><th>Experto</th><th>Estado</th><th></th></tr>
+    </thead>
+    <tbody>
+      @for (ticket of visibles; track ticket.id) {
+        <tr>
+          <td>{{ ticket.codigo }}</td>
+          <td>{{ ticket.aparato }} {{ ticket.marca }} {{ ticket.modelo }}</td>
+          <td>{{ ticket.categoria }}</td>
+          <td>{{ ticket.dueno }}</td>
+          <td>{{ ticket.experto || 'Sin asignar' }}</td>
+          <td><span [class]="'estado ' + ticket.estado">{{ ticket.estado }}</span></td>
+          <td>
+            <button class="boton-secundario" type="button" (click)="ver(ticket)">Detalle</button>
+            @if (auth.usuario()?.rol === 'administrador' && ticket.estado === 'Pendiente') {
+              <button class="boton" type="button" (click)="emparejar(ticket)">Emparejar</button>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="7">No hay tickets con ese filtro.</td></tr>
+      }
+    </tbody>
+  </table>
+</div>
+@if (abierto) {
+  <section class="panel">
+    <h2>{{ abierto.codigo }} · {{ abierto.aparato }}</h2>
+    <p>{{ abierto.problema }}</p>
+    <p>Evento: {{ abierto.evento }}</p>
+    <h3>Historial</h3>
+    @for (paso of abierto.historial; track paso.nota) {
+      <p>{{ paso.estado_nuevo }} — {{ paso.nota }} @if (paso.autor) { ({{ paso.autor }}) }</p>
+    }
+    @if (auth.usuario()?.rol === 'administrador') {
+      <label class="campo">Asignar experto manualmente
+        <select [(ngModel)]="expertoId">
+          @for (experto of expertos; track experto.id) {
+            <option [value]="experto.id">{{ experto.nombre }} · {{ experto.especialidades }}</option>
+          }
+        </select>
+      </label>
+      <button class="boton" type="button" (click)="asignar(abierto)">Asignar</button>
+    }
+  </section>
+}

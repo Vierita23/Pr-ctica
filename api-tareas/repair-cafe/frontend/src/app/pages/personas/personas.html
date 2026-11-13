@@ -1,0 +1,36 @@
+<h1>Personas</h1>
+@if (error) { <p class="error">{{ error }}</p> }
+<section class="panel">
+  <h2>Expertos voluntarios</h2>
+  <table class="tabla">
+    <thead><tr><th>Nombre</th><th>Especialidades</th><th>Disponible</th><th>Carga</th><th>Cupo</th></tr></thead>
+    <tbody>
+      @for (experto of expertos; track experto.id) {
+        <tr>
+          <td>{{ experto.nombre }}</td>
+          <td>{{ experto.especialidades }}</td>
+          <td>{{ experto.disponible ? 'Sí' : 'No' }}</td>
+          <td>{{ experto.carga }}</td>
+          <td>{{ experto.cupo_maximo }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>
+<section class="panel">
+  <h2>Usuarios</h2>
+  <table class="tabla">
+    <thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Registro</th><th></th></tr></thead>
+    <tbody>
+      @for (usuario of usuarios; track usuario.id) {
+        <tr>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.correo }}</td>
+          <td>{{ usuario.rol }}</td>
+          <td>{{ usuario.creado_en | date:'dd/MM/yyyy' }}</td>
+          <td><button class="boton-peligro" type="button" (click)="eliminar(usuario.id)">Eliminar</button></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</section>

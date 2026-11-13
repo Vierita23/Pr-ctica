@@ -1,0 +1,7 @@
+.metricas { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 20px 0; }
+.tarjeta span { color: #52606d; }
+.tarjeta strong { display: block; font-size: 1.8rem; color: #1f7a4d; }
+.panel { margin-top: 16px; }
+.barra { display: grid; grid-template-columns: 140px 1fr 30px; gap: 10px; align-items: center; margin: 8px 0; }
+.barra div { background: #e8eeea; border-radius: 999px; height: 10px; }
+.barra i { display: block; height: 10px; background: #1f7a4d; border-radius: 999px; }

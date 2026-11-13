@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Lista de Tareas (Consumo Reactivo con Pipe Async)</h2>
+  <div *ngIf="tareas$ | async as tareas; else cargando">
+    <table *ngIf="tareas.length > 0; else vacia" class="tabla-spa">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Descripción</th>
+          <th>Prioridad</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of tareas">
+          <td>{{ t.id }}</td>
+          <td>{{ t.titulo }}</td>
+          <td>{{ t.descripcion }}</td>
+          <td><span class="prioridad" [class]="'prioridad ' + t.prioridad">{{ t.prioridad }}</span></td>
+          <td>{{ t.completada ? 'Completada' : 'Pendiente' }}</td>
+          <td>
+            <button (click)="eliminar(t.id)" class="btn-borrar">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #vacia>
+      <p class="vacia">No hay tareas en el servicio.</p>
+    </ng-template>
+  </div>
+  <ng-template #cargando>
+    <p class="cargando-text">Cargando datos desde el Servicio REST...</p>
+  </ng-template>
+</div>

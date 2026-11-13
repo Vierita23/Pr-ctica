@@ -1,0 +1,20 @@
+<h1>Registrar aparato dañado</h1>
+<form class="panel" (ngSubmit)="enviar()">
+  <label class="campo">Nombre del electrodoméstico<input name="nombre" [(ngModel)]="nombre" required></label>
+  <label class="campo">Categoría
+    <select name="categoria" [(ngModel)]="categoria">
+      @for (item of categorias; track item.id) { <option [value]="item.nombre">{{ item.nombre }}</option> }
+    </select>
+  </label>
+  <label class="campo">Marca<input name="marca" [(ngModel)]="marca" required></label>
+  <label class="campo">Modelo<input name="modelo" [(ngModel)]="modelo" required></label>
+  <label class="campo">Descripción del problema<textarea name="problema" [(ngModel)]="problema" required></textarea></label>
+  <label class="campo">Fotografía opcional<input type="file" accept="image/*" (change)="elegirFoto($event)"></label>
+  <label class="campo">Evento
+    <select name="evento" [(ngModel)]="eventoId">
+      @for (evento of eventos; track evento.id) { <option [value]="evento.id">{{ evento.nombre }}</option> }
+    </select>
+  </label>
+  @if (error) { <p class="error">{{ error }}</p> }
+  <button class="boton" type="submit">Crear ticket</button>
+</form>

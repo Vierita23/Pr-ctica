@@ -1,0 +1,31 @@
+<h1>Eventos</h1>
+@if (error) { <p class="error">{{ error }}</p> }
+@if (mensaje) { <p class="aviso">{{ mensaje }}</p> }
+<div class="lista">
+  @for (evento of eventos; track evento.id) {
+    <article class="tarjeta">
+      <h2>{{ evento.nombre }}</h2>
+      <p>{{ evento.descripcion }}</p>
+      <p>{{ evento.fecha | date:'dd/MM/yyyy' }} · {{ hora(evento.hora_inicio) }} a {{ hora(evento.hora_fin) }}</p>
+      <p>{{ evento.ubicacion }} · Cupo: {{ evento.capacidad }}</p>
+      @if (auth.usuario()?.rol === 'administrador') {
+        <button class="boton-peligro" type="button" (click)="eliminar(evento.id)">Eliminar</button>
+      }
+    </article>
+  } @empty {
+    <p>No hay eventos programados.</p>
+  }
+</div>
+@if (auth.usuario()?.rol === 'administrador') {
+  <form class="panel" (ngSubmit)="crear()">
+    <h2>Nuevo evento</h2>
+    <label class="campo">Nombre<input name="nombre" [(ngModel)]="nombre" required></label>
+    <label class="campo">Descripción<textarea name="descripcion" [(ngModel)]="descripcion" required></textarea></label>
+    <label class="campo">Ubicación<input name="ubicacion" [(ngModel)]="ubicacion" required></label>
+    <label class="campo">Fecha<input type="date" name="fecha" [(ngModel)]="fecha" required></label>
+    <label class="campo">Hora de inicio<input type="time" name="inicio" [(ngModel)]="horaInicio" required></label>
+    <label class="campo">Hora de fin<input type="time" name="fin" [(ngModel)]="horaFin" required></label>
+    <label class="campo">Capacidad<input type="number" name="capacidad" [(ngModel)]="capacidad" min="1" required></label>
+    <button class="boton" type="submit">Guardar evento</button>
+  </form>
+}
